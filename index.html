@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استخراج كلمة سر الواي فاي</title>
+    <meta name="description" content="أداة لاستخراج كلمة سر الواي فاي للراوترات التي تبدأ بـ fh أو d4fs من خلال تحليل الاسم.">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                    <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                </svg>
+            </div>
+            <h1>كاشف كلمة السر</h1>
+            <p>أدخل اسم شبكة الواي فاي (SSID) مثل <span>fh_2e3ab8</span> للحصول على كلمة المرور.</p>
+        </header>
+
+        <main>
+            <div class="input-group">
+                <input type="text" id="ssidInput" placeholder="أدخل اسم الشبكة هنا..." autocomplete="off">
+                <div class="focus-border"></div>
+            </div>
+
+            <button id="generateBtn" class="primary-btn">
+                <span>استخراج كلمة السر</span>
+                <div class="btn-glow"></div>
+            </button>
+
+            <div id="resultContainer" class="result-container hidden">
+                <div class="result-label">كلمة السر الخاصة بك:</div>
+                <div class="password-box">
+                    <span id="passwordResult"></span>
+                    <button id="copyBtn" class="copy-btn" title="نسخ كلمة السر">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="copyToast" class="toast">تم النسخ بنجاح!</div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>يعتمد على خوارزمية التبديل العكسي</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful');
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
